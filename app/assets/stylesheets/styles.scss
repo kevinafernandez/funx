@@ -1,0 +1,65 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #efefef;
+  font-family: Poppins-Regular !important;
+}
+
+.navbar {
+  background: linear-gradient(120deg, #5c73ec 23%, #2f87ee 90%);
+  //background: linear-gradient(120deg, #396073 23%, #557b8e 90%);
+  box-shadow: 0 0 0.8125rem 0 #888888;
+
+  & img {
+    height: 40px;
+    width: 50px;
+  }
+
+}
+
+.home {
+  padding: 3rem;
+  margin-top: 2rem;
+  
+  & .title {
+    font-size: 24px;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  & .fa {
+    color: black;
+    margin-left: .2rem;
+    margin-right: .3rem;
+  }
+
+  & .card {
+    box-shadow: 0 4px 8px 0 #0000001a, 0 6px 20px 0 #ede9e9;
+    border-radius: 0.25rem;
+    border: 1px solid #d0d0d0;
+    margin-bottom: 3rem;
+
+
+    & .card-body {
+      padding-top: 0rem !important;
+      padding: 2rem;
+    }
+
+    & .info {
+      color: red;
+      display: none;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 1.5rem;
+      margin-bottom: 0rem;
+    }
+  }
+
+  & canvas {
+    background: white;
+  }
+
+}
