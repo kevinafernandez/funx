@@ -87,7 +87,7 @@ window.addEventListener('load', function () {
 		// display total played songs per artist
 		myChart.options.tooltips.callbacks.label = function (tooltipItem, data) {
 			for (i = 0; i < data["datasets"].length; i++) {
-				return `Reproducciones: ${data.datasets[i]["data"]}`;
+				return `Reproducciones: ${data.datasets[tooltipItem["datasetIndex"]]["data"][0]}`;
 			};
 		}
 		
