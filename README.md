@@ -21,7 +21,7 @@ Para este proyecto debes considerar o instalar las siguientes versiones:
 
 ## Instalación
 
-* Clona este repositorio vía HTTPS: `https://github.com/kevinafernandez/funx.git`
+* Clona este repositorio vía HTTPS: `git clone https://github.com/kevinafernandez/funx.git`
 
 * Instala todas las gemas y dependencias: `bundle install`
 
@@ -41,4 +41,4 @@ Para este proyecto debes considerar o instalar las siguientes versiones:
 
 ## Parte 2 Factorial
 
-* `public/exercise/factorial.rb` - Contiene el ejercicio del factorial de un número, esto como resolución de la 2da parte de la prueba, en el se aplican dos soluciones para obtener el factorial, la primera con **recursividad** y la segunda con **iteración**.
+* `public/ruby/factorial.rb` - Contiene el ejercicio del factorial de un número, esto como resolución de la 2da parte de la prueba, en el se aplican dos soluciones para obtener el factorial, la primera con **recursividad** y la segunda con **iteración**.
