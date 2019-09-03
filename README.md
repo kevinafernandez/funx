@@ -33,6 +33,8 @@ Para este proyecto debes considerar o instalar las siguientes versiones:
 
 ## Carpetas
 
+* `app/assets/stylesheets/styles.scss` - Contiene una serie de estilos SCSS para la aplicación.
+
 * `app/views/home/index` - Contiene la vista principal en donde se despliega el gráfico para el top de artistas.
 
 * `public/javascript/lib/chart.js` - Contiene la lógica donde se crea el gráfico, se utilizó la librería ChartJS (info: https://www.chartjs.org/) para dicha implementación.
