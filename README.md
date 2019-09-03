@@ -1,13 +1,13 @@
 # Funx Aplicación
 
-Funx Aplicación basada en RoR 5.2.3
+Aplicación basada en RoR 5.2.3
 
 ## Tabla de contenidos
 * [Información general](#información-general)
 * [Tecnologías](#tecnologías)
 * [Instalación](#instalación) 
 * [Carpetas](#carpetas)
-* [Parte 2 - Factorial](#factorial)
+* [Parte 2 Factorial](#parte-2-factorial)
 
 ## Información general
 
@@ -27,15 +27,15 @@ Para este proyecto debes considerar o instalar las siguientes versiones:
 
 * Por defecto, crea la BD y ejecuta las migraciones: `rails db:create && rails db:migrate`
 
-* **Para visualizar la gráfica con datos, debes crear desde la API al menos un artista y un álbum relacionado a dicho artista (ejemplos: https://github.com/kevinafernandez/funx_api#ejemplos), de lo contrario, la aplicación validará que no existen datos por mostrar en la gráfica**
+* **Para visualizar la gráfica con datos, debes crear desde la API al menos un artista y un álbum relacionado a dicho artista (ejemplos: https://github.com/kevinafernandez/funx_api#ejemplos), de lo contrario, la aplicación validará que no existen datos por mostrar en la gráfica.**
 
 * Al ejecutar los servidores de la API y la aplicación al mismo tiempo, inicia el servidor de la API en otro puerto, ejemplo: `rails server -p3001` y el servidor de la aplicacion en su puerto por defecto: `rails server` ó viceversa.
 
 ## Carpetas
 
-* `app/views/home/index` - Contiene la vista principal en donde se despliega el gráfico para el top de artistas
+* `app/views/home/index` - Contiene la vista principal en donde se despliega el gráfico para el top de artistas.
 
-* `public/javascript/lib/chart.js` - Contiene la lógica donde se crea el gráfico, se utilizó la librería ChartJS (info: https://www.chartjs.org/) para dicha implementación
+* `public/javascript/lib/chart.js` - Contiene la lógica donde se crea el gráfico, se utilizó la librería ChartJS (info: https://www.chartjs.org/) para dicha implementación.
 
 ## Parte 2 - Factorial
 
