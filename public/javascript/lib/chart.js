@@ -1,7 +1,7 @@
-window.addEventListener('load', function () {
+$(function() {
 
-	// create initial empty chart
-	var context = document.getElementById('chart');
+  // create initial empty chart with basic config
+  var context = document.getElementById('chart');
 	var myChart = new Chart(context, {
 		type: 'bar',
 		data: {
@@ -9,26 +9,24 @@ window.addEventListener('load', function () {
 			datasets: []
 		},
 		options: {
-			responsive: true,
-			title: { // leyend title
-				display: true,
-				fontColor: 'grey',
-				fontStyle: 'bold',
-				text: 'Leyenda',
-				padding: 15
-			},
+      responsive: true,
+      legend: {
+        display: false,
+        padding: 50
+      },
 			scales: {
-				yAxes: [{ //eye Y
+				yAxes: [{ // Y scale
 					scaleLabel: {
 						display: true,
 						labelString: 'REPRODUCCIONES'
 					},
 					ticks: {
 						min: 0,
-						stepSize: 5,
+						fontColor: "black",
+						stepSize: 5
 					}
 				}],
-				xAxes: [{ //eye X
+				xAxes: [{ //X scale
 					scaleLabel: {
 						display: true,
 						labelString: 'ARTISTAS'
@@ -36,17 +34,15 @@ window.addEventListener('load', function () {
 				}]
 			}
 		}
-	});
-
+  });
+  
 	// AJAX request to get data
-	var endpoint = 'http://localhost:3000/api/v1/albums';
+	var endpoint = 'http://localhost:3000/api/v1/albums'; // in case you're using another port or URL please change 
 	$.ajax({
 		url: endpoint,
 		method: 'GET',
 		success: function (response) {
-			$.each(response.data, function (i, data) {
-				buildChart(data);
-			})
+			buildChart(response.data); //logic for fill chart with API data
 		},
 		error: function () {
 			$('.info').append('Error de conexión con servidor API, verifica.').css('display', 'block');
@@ -54,65 +50,76 @@ window.addEventListener('load', function () {
 		}
 	});
 
-	// fill the chart with data
-	function buildChart(data) {
 
-		// data for datasets
-		myChart.data.datasets.push({ 
-			backgroundColor: dynamicBackground(),
+  function buildChart(dataApi) {
+    var total_played = [];
+    var artists = []; 
+    var backgroundColor = [];
+    var borderColor = [];
+
+    //push data to empty arrays
+    dataApi.map(function(object){
+      var colors = dynamicColors();
+			total_played.push(object.attributes.total_played);
+			artists.push(object.attributes.artist_name);
+      backgroundColor.push(colors.background);
+      borderColor.push(colors.border);
+    })
+    
+    // fill datasets to display data in charts
+    myChart.data.datasets.push({
+      label: false,
+			backgroundColor: backgroundColor,
+			borderColor: borderColor,
 			borderWidth: 1,
-			borderColor: '#e0e7ea',
-			data: [data.attributes.total_played],
-			label: [data.attributes.owner],
-			album: [data.attributes.name],
-			release_date: [data.attributes.release_date]
+      data: total_played, //show quantity of albums played in Y scale
 		});
-		
-		//myChart.data.labels.push(data.attributes.owner); //falta label abajo
 
-		// display artist name
-		myChart.options.tooltips.callbacks.title = function (tooltipItem, data) { 
-			for (i = 0; i < data["datasets"].length; i++) {
-				return `${data.datasets[tooltipItem[i]["datasetIndex"]]["label"]}`;
-			};
-		}
+    // show artist name in X scale
+    myChart.data.labels = artists;
 
-		// display album name
-		myChart.options.tooltips.callbacks.beforeLabel = function (tooltipItem, data) {
-			for (i = 0; i < data["datasets"].length; i++) {
-				return `Albúm: ${data.datasets[tooltipItem["datasetIndex"]]["album"]}`;
-			};
-		}
 
-		// display total played songs per artist
-		myChart.options.tooltips.callbacks.label = function (tooltipItem, data) {
-			for (i = 0; i < data["datasets"].length; i++) {
-				return `Reproducciones: ${data.datasets[tooltipItem["datasetIndex"]]["data"][0]}`;
-			};
-		}
-		
-		// display release date album
-		myChart.options.tooltips.callbacks.afterLabel = function (tooltipItem, data) {
-			for (i = 0; i < data["datasets"].length; i++) {
-				var release_date = data.datasets[tooltipItem["datasetIndex"]]["release_date"][i];
-				if (release_date != null) {
-					return `Lanzamiento: ${release_date}`;
-				}
-			};
-		}
+    // Fill data for tooltips when hover in a specific bar
+      
+      // display name of album
+      myChart.options.tooltips.callbacks.beforeLabel = function (tooltipItem, data) {
+        var index = tooltipItem["index"]; //specific coordenates from each bar in scale X and scale Y
+        return `Álbum: ${dataApi[index].attributes.name}`;
+      }
 
-		myChart.update(); // re-render the chart
-	}
-	
-	// create random's backgrounds for bar's in chart
-	function dynamicBackground() { 
-		var r = Math.floor((Math.random() * 255) + 50);
-		var g = Math.floor((Math.random() * 255) + 50);
-		var b = Math.floor((Math.random() * 255) + 50);
-		return "rgb(" + r + "," + g + "," + b + ")";
-	}			var x = 0;
+      // display total played songs per artist
+      myChart.options.tooltips.callbacks.label = function (tooltipItem, data) {
+        var index = tooltipItem["index"];
+        return `Reproducciones: ${dataApi[index].attributes.total_played}`;
+      }
 
-	// default config
+      // display release_date for album
+      myChart.options.tooltips.callbacks.afterLabel = function (tooltipItem, data) {
+        var index = tooltipItem["index"];
+        var release_date = dataApi[index].attributes.release_date;
+        if (release_date != null) {
+          return `Lanzamiento: ${release_date}`;
+        }
+      }
+
+    myChart.update(); // re-render the chart
+  }
+
+  // create random's colors for bars in chart
+	function dynamicColors() { 
+		var r = Math.floor((Math.random() * 255));
+    var g = Math.floor((Math.random() * 255));
+    var b = g + 25;
+    var a = 0.40; //transparency
+    var background = `rgb(${r},${g},${b}, ${a})`;
+    var border = `rgb(${r-50},${g-50},${b-50})`;
+    return {
+      "background": background,
+      "border": border
+    }
+  }
+
+  // default config
 	Chart.defaults.global.defaultFontFamily = "Poppins-Regular";
-	Chart.defaults.global.defaultFontSize = 15;
-})
+	Chart.defaults.global.defaultFontSize = 14;
+});
