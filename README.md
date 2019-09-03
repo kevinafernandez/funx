@@ -7,7 +7,7 @@ Aplicación basada en RoR 5.2.3
 * [Tecnologías](#tecnologías)
 * [Instalación](#instalación) 
 * [Carpetas](#carpetas)
-* [Parte 2 Factorial](#parte-2-factorial)
+* [Parte 2 factorial](#parte-2-factorial)
 
 ## Información general
 
