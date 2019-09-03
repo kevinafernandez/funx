@@ -7,7 +7,7 @@ Aplicación basada en RoR 5.2.3
 * [Tecnologías](#tecnologías)
 * [Instalación](#instalación) 
 * [Carpetas](#carpetas)
-* [Parte 2 factorial](#parte-2-factorial)
+* [Parte 2 Factorial](#parte-2-factorial)
 
 ## Información general
 
@@ -37,6 +37,6 @@ Para este proyecto debes considerar o instalar las siguientes versiones:
 
 * `public/javascript/lib/chart.js` - Contiene la lógica donde se crea el gráfico, se utilizó la librería ChartJS (info: https://www.chartjs.org/) para dicha implementación.
 
-## Parte 2 - Factorial
+## Parte 2 Factorial
 
 * `public/exercise/factorial.rb` - Contiene el ejercicio del factorial de un número, esto como resolución de la 2da parte de la prueba, en el se aplican dos soluciones para obtener el factorial, la primera con **recursividad** y la segunda con **iteración**.
